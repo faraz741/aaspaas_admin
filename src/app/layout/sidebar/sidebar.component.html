@@ -3,12 +3,19 @@
         <i class="fa-solid fa-xmark"></i>
     </div>
     <div class="ct_logo">
-        <img src="img/login_main.png" alt="">
+        <img src="/assets/img/login_main.png" alt="">
     </div>
     <ul class="mb-0 ps-0 ct_menu_links mt-5">
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="past-dailys.html">Past Dailys</a></li>
-        <li class="dropdown active ct_custom_dropdown"><a href="javascript:void(0)" class=" dropdown-toggle"  id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Books of the Bible</a>
+        <li [ngClass]="{ 'active': isActive('/main/dashboard') }"><a routerLink="/main/dashboard">Dashboard</a></li>
+        <li [ngClass]="{ 'active': isActive('/main/templates') }"><a routerLink="/main/templates">Templates</a></li>
+        <li [ngClass]="{ 'active': isActive('/main/users') }"><a routerLink="/main/users">Users</a></li>
+        <li [ngClass]="{ 'active': isActive('/main/advertisement') }">
+            <a routerLink="/main/advertisement"> Add Advertisement</a>
+        </li>
+        <li [ngClass]="{ 'active': isActive('/main/banners') }">
+            <a routerLink="/main/banners"> Banners</a>
+        </li>
+        <!-- <li class="dropdown active ct_custom_dropdown"><a href="javascript:void(0)" class=" dropdown-toggle"  id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Books of the Bible</a>
             <ul  class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                 <li>
                     <a  class="dropdown-item" href="old-testament.html">Old Testament</a>
@@ -17,8 +24,8 @@
                     <a  class="dropdown-item" href="new-testament.html">New Testament</a>
                 </li>
             </ul>
-        </li>
-        <li class="dropdown ct_custom_dropdown"><a href="javascript:void(0)" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Member Area</a>
+        </li> -->
+        <!-- <li class="dropdown ct_custom_dropdown"><a href="javascript:void(0)" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Member Area</a>
             <ul  class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
                     <a  class="dropdown-item" href="saved-verses.html">Saved Verses</a>
@@ -34,14 +41,12 @@
                 </li>
                 
             </ul>
-        </li>
-        <li>
-            <a href="advertisement.html"> Add Advertisement</a>
-        </li>
-        <li><a href="suggested-sites.html">Suggested Sites</a></li>
+        </li> -->
+       
+        <!-- <li><a href="suggested-sites.html">Suggested Sites</a></li>
         <li>
             <a href="send-bible-verse.html">Send Bible Verses</a>
-        </li>
+        </li> -->
     </ul>
   
 </div>
