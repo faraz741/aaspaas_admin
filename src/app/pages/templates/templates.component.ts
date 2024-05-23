@@ -71,6 +71,25 @@ export class TemplatesComponent {
     if (inputElement.files && inputElement.files.length > 0) {
       this.UploadedFile = inputElement.files[0];
     }
+  };
+
+  
+  PreviewImage() {
+    var fileReader = new FileReader();
+    var fileInput = document.getElementById("uploadPreview") as HTMLImageElement; // Assuming uploadPreview is an img element
+
+    fileReader.onload = function (fileEvent) {
+      if (fileEvent.target && fileEvent.target.result) {
+        fileInput.src = fileEvent.target.result as string;
+      }
+    };
+
+    // Assuming you have an input element with the type 'file' where users can select an image
+    var fileInputElement = document.getElementById("exampleInputFile") as HTMLInputElement;
+
+    if (fileInputElement.files && fileInputElement.files[0]) {
+      fileReader.readAsDataURL(fileInputElement.files[0]);
+    }
   }
 
 }

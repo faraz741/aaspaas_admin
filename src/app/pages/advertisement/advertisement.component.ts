@@ -44,7 +44,12 @@ export class AdvertisementComponent {
     this.newForm.markAllAsTouched();
     if (this.newForm.valid) {
       const formURlData = new FormData();
-      formURlData.set('file', this.UploadedFile);
+      const fileInput = document.getElementById("exampleInputFile") as HTMLInputElement;
+
+      if (fileInput.files && fileInput.files[0]) {
+        const uploadedFile = fileInput.files[0];
+        formURlData.append('file', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
+      }
       formURlData.set('links', this.newForm.value.links)
       this.service.postAPI('uploadsuggested_links', formURlData).subscribe({
         next: (resp) => {
@@ -81,6 +86,25 @@ export class AdvertisementComponent {
       this.UploadedFile = inputElement.files[0];
     }
 
+  };
+
+
+  PreviewImage() {
+    var fileReader = new FileReader();
+    var fileInput = document.getElementById("uploadPreview") as HTMLImageElement; // Assuming uploadPreview is an img element
+
+    fileReader.onload = function (fileEvent) {
+      if (fileEvent.target && fileEvent.target.result) {
+        fileInput.src = fileEvent.target.result as string;
+      }
+    };
+
+    // Assuming you have an input element with the type 'file' where users can select an image
+    var fileInputElement = document.getElementById("exampleInputFile") as HTMLInputElement;
+
+    if (fileInputElement.files && fileInputElement.files[0]) {
+      fileReader.readAsDataURL(fileInputElement.files[0]);
+    }
   }
 
 }
