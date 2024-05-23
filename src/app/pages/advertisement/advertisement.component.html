@@ -1,10 +1,12 @@
 <div class="ct_middle_cnt">
     <div class="mt-4 mb-5">
-        <h4 class="mb-0 ct_h2 mb-4">Previous Verses</h4>
+        <div class="d-flex align-items-center justify-content-between flex-wrap mb-4 gap-2">
+            <h4 class="mb-0 ct_h2 ">Previous Verses</h4>
+            <button type="button" class="ct_custom_btn w-auto py-2" data-bs-toggle="modal" data-bs-target="#ct_supplier_detail">
+                + Add Template
+            </button>
 
-        <button type="button" class="ct_custom_btn" data-bs-toggle="modal" data-bs-target="#ct_supplier_detail">
-            Add Template
-        </button>
+        </div>
 
 
         <div class="table-responsive ct_custom_table">
@@ -20,7 +22,7 @@
                 </div>
                 <div class="row mt-2 justify-content-md-center">
                     <div class="col-12 ">
-                        <table class="table table-striped dataTable" id="example" aria-describedby="example_info"
+                        <table class="table table-striped dataTable mb-0" id="example" aria-describedby="example_info"
                             style="width: 1531px;">
                             <colgroup>
                                 <col style="width: 179.125px;">
@@ -80,7 +82,7 @@
 
 <div class="modal fade Committed_Price" id="ct_supplier_detail" tabindex="-1" aria-labelledby="ct_supplier_detailLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="pt-5">
@@ -104,12 +106,12 @@
 
 
                         <div class="modal-footer justify-content-center border-0">
-                            <button type="button" class="ct_custom_btn"
+                            <button type="button" class="ct_custom_btn w-auto py-2"
                                 data-bs-dismiss="modal">Cancel</button>
-                            <button type="button ct_"
-                                class="ct_custom_btn" (click)="addEvent()">Add
+                            <button type="button"
+                                class="ct_custom_btn w-auto py-2" (click)="addEvent()">Add
                                 Task</button>
-                            <button hidden type="button" class="btn btn-secondary" #closeModal
+                            <button hidden type="button" class="btn btn-secondary w-auto py-2" #closeModal
                                 data-bs-dismiss="modal">Close</button>
                         </div>
                     </form>

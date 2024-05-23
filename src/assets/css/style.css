@@ -892,7 +892,7 @@ select.ct_verse_version_drop {
 .ct_custom_table {
     border: 1px solid #dee2e6;
     border-radius: 10px;
-    padding: 15px;
+    padding: 0px 15px;
 }
 
 .ct_custom_table tbody tr td {
@@ -1443,6 +1443,18 @@ span.ct_saved_verse_date {
     transform: translateY(-10px);
 }
 
+.ct_event_img img {
+    width: 150px;
+    border-radius: 10px;
+    height: 90px;
+}
+img#uploadPreview {
+    width: 100% !important;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+}
 @media screen and (max-width:991px) {
 
     .ct_toggle_bar,
