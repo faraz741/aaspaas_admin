@@ -1455,6 +1455,18 @@ img#uploadPreview {
     border-radius: 10px;
     margin-top: 10px;
 }
+img#uploadPreview1,#uploadPreview2 {
+    width: 100% ;
+    height: 0px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+.ct_img_160_600{
+    width: 160px;
+    height: 600px;
+    object-fit: cover;
+}
 @media screen and (max-width:991px) {
 
     .ct_toggle_bar,
