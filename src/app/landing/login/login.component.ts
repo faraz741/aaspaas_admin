@@ -39,7 +39,7 @@ export class LoginComponent {
         next: (resp) => {
           if (resp.success == true) {
             this.route.navigateByUrl("/main/dashboard");
-            localStorage.setItem('userDetail', JSON.stringify(resp.admin));
+            localStorage.setItem('userDetail', JSON.stringify(resp.user_info));
             this.srevice.setToken(resp.token);
             //this.toastr.success(resp.message);
             this.loading = false;
