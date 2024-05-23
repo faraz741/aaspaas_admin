@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-templates',
@@ -8,8 +10,49 @@ import { FormGroup } from '@angular/forms';
 })
 export class TemplatesComponent {
 
-  newForm!: FormGroup;
+  //newForm!: FormGroup;
   UploadedFile!: File;
+  @ViewChild('closeModal2') closeModal2!: ElementRef;
+  data: any[] = [];
+
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  constructor(private route: Router, private service: MainService) { }
+
+  getData() {
+    this.service.getApi('getCardTemplate').subscribe({
+      next: resp => {
+        this.data = resp.data.reverse();
+      },
+      error: error => {
+        console.log(error.message)
+      }
+    });
+  }
+
+  addFile() {
+    //this.newForm.markAllAsTouched();
+    const formURlData = new FormData();
+    formURlData.append('file', this.UploadedFile);
+    this.service.postAPI('uploadCardTemplate', formURlData).subscribe({
+      next: (resp) => {
+        if (resp.success === true) {
+          this.closeModal2.nativeElement.click();
+          // this.toastr.success(resp.message);
+          //this.toastr.success('Update successful!');
+          //this.getEventData();
+        
+        }
+        //this.newForm.reset();  
+      },
+      error: error => {
+        //this.toastr.warning('Something went wrong.');
+        console.log(error.message)
+      }
+    })
+  }
 
   handleFileInput(event: any) {
     const file = event.target.files[0];
@@ -28,7 +71,6 @@ export class TemplatesComponent {
     if (inputElement.files && inputElement.files.length > 0) {
       this.UploadedFile = inputElement.files[0];
     }
-
   }
 
 }
