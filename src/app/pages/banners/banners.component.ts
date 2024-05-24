@@ -65,9 +65,6 @@ export class BannersComponent {
           // formData.reset();
           this.getData()
           fileInput.value = ''
-
-
-
         } else {
 
         }

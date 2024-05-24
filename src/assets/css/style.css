@@ -1448,17 +1448,17 @@ span.ct_saved_verse_date {
     border-radius: 10px;
     height: 90px;
 }
-img#uploadPreview {
+/* img#uploadPreview {
     width: 100% !important;
     height: 150px;
     object-fit: cover;
     border-radius: 10px;
     margin-top: 10px;
-}
-img#uploadPreview1,#uploadPreview2 {
+} */
+.ct_upload_img_121 {
     width: 100% ;
-    height: 0px;
-    object-fit: cover;
+    height: 150px;
+    object-fit: contain;
     border-radius: 10px;
     margin-top: 15px;
 }
