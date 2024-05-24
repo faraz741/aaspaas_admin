@@ -35,7 +35,6 @@ export class BannersComponent {
   onUpdate() {
     console.log("cliekd");
 
-
     const fileInput = document.getElementById("exampleInputFile1") as HTMLInputElement;
     const fileInput2 = document.getElementById("exampleInputFile2") as HTMLInputElement;
     const fileInput3 = document.getElementById("exampleInputFile3") as HTMLInputElement;

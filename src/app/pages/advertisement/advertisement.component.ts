@@ -58,7 +58,7 @@ export class AdvertisementComponent {
           }
           this.newForm.reset();
           //this.toastr.success(resp.message);
-          //this.getEventData()
+          this.getData()
         },
         error: error => {
           //this.toastr.warning('Something went wrong.');

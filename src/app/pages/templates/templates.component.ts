@@ -35,14 +35,18 @@ export class TemplatesComponent {
   addFile() {
     //this.newForm.markAllAsTouched();
     const formURlData = new FormData();
-    formURlData.append('file', this.UploadedFile);
+    const fileInput = document.getElementById("exampleInputFile") as HTMLInputElement;
+    if (fileInput.files && fileInput.files[0]) {
+      const uploadedFile = fileInput.files[0];
+      formURlData.append('file', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
+    }
     this.service.postAPI('uploadCardTemplate', formURlData).subscribe({
       next: (resp) => {
         if (resp.success === true) {
           this.closeModal2.nativeElement.click();
           // this.toastr.success(resp.message);
           //this.toastr.success('Update successful!');
-          //this.getEventData();
+          this.getData();
         
         }
         //this.newForm.reset();  
