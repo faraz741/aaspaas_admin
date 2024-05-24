@@ -9,7 +9,8 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class BannersComponent {
   // image:'https://tiptwo.com.au:3001/image',
-  imageURl = 'http://localhost:4000/profile';
+  // imageURl = 'http://localhost:4000/profile';
+  imageURl = 'http://52.204.188.107:4000/profile';
   imageData: any[] = [];
 
   ngOnInit(): void {
