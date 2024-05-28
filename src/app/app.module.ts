@@ -15,7 +15,8 @@ import { BannersComponent } from './pages/banners/banners.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeadersInterceptor } from './services/interceptor/headers.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(), 
+    BrowserAnimationsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true }],
   bootstrap: [AppComponent]

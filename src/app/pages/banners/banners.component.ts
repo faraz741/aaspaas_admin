@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MainService } from 'src/app/services/main.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-banners',
   templateUrl: './banners.component.html',
@@ -11,6 +11,9 @@ export class BannersComponent {
   // image:'https://tiptwo.com.au:3001/image',
   // imageURl = 'http://localhost:4000/profile';
   imageURl = 'http://52.204.188.107:4000/profile';
+  sidebar_link = '';
+  small_link = '';
+  big_link = '';
   imageData: any[] = [];
 
   ngOnInit(): void {
@@ -18,12 +21,15 @@ export class BannersComponent {
     this.getData();
   }
 
-  constructor(private route: Router, private service: MainService) { }
+  constructor(private route: Router, private service: MainService, private toastr: ToastrService) { }
 
   getData() {
     this.service.getApi('getbanners').subscribe({
       next: resp => {
         this.imageData = resp.data;
+        this.sidebar_link = this.imageData[0].sidebar_link;
+        this.small_link = this.imageData[0].small_link;
+        this.big_link = this.imageData[0].big_link;
       },
       error: error => {
         console.log(error.message)
@@ -55,7 +61,9 @@ export class BannersComponent {
       formData.append('big_image', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
     }
 
-
+    formData.append('sidebar_link', this.sidebar_link); 
+    formData.append('small_link',this.small_link);
+     formData.append('big_link', this.big_link);
 
     this.service.postAPI('updateBanners', formData).subscribe({
       next: (res: any) => {
@@ -63,6 +71,7 @@ export class BannersComponent {
 
         if (res.success == true) {
           // formData.reset();
+          this.toastr.success(res.message, ' ');
           this.getData()
           fileInput.value = ''
         } else {

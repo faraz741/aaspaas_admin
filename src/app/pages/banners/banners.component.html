@@ -1,70 +1,97 @@
 <div class="ct_middle_cnt">
-    <div class="mt-4 mb-5">
-        <h4 class="mb-0 ct_h2 mb-4">User side banners</h4>
-
-       
+  <div class="mt-4 mb-5">
+    <h4 class="mb-0 ct_h2 mb-4">User side banners</h4>
 
 
-        <div class="">
-            <div class="row mt-4">
-                <div class="col-md-12 mb-3">
-                    <div class="form-group">
-                        <label for="Name" class="mb-2 ct_fw_600">Sidebar Banner (Size should be 160*600)</label>
-                        <input type="file" (change)="PreviewImage('sidebar')"   placeholder="Enter Venue Name" id="exampleInputFile1"  class="form-control"   accept="image/png, image/svg+xml, image/gif, image/jpeg">
-                        <img class="ct_upload_img_121" src="{{imageURl}}/{{imageData[0]?.sidebar_image}}"  alt="" id="uploadPreview1">
-                        <!-- <span class="text-danger"
+
+
+    <div class="">
+      <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <label for="Name" class="mb-2 ct_fw_600">Sidebar Banner (Size should be 160*600)</label>
+            <input type="file" (change)="PreviewImage('sidebar')" placeholder="Enter Venue Name" id="exampleInputFile1"
+              class="form-control" accept="image/png, image/svg+xml, image/gif, image/jpeg">
+            <img class="ct_upload_img_121" src="{{imageURl}}/{{imageData[0]?.sidebar_image}}" alt=""
+              id="uploadPreview1">
+            <!-- <span class="text-danger"
                         *ngIf="createRace.get('race_venue')?.invalid && createRace.get('race_venue')?.touched">
                         <div *ngIf="createRace.get('race_venue')?.errors?.['required']">
                           Please enter race venue
                         </div>
                       </span> -->
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                  
-                    <div class="form-group">
-                        <label for="Name" class="mb-2 ct_fw_600">Small image (Size should be 468*60)</label>
-                        <input type="file" (change)="PreviewImage('small')" placeholder="Enter Venue Name" id="exampleInputFile2" class="form-control"   accept="image/png, image/svg+xml, image/gif, image/jpeg">
-                        <img class="ct_upload_img_121" src="{{imageURl}}/{{imageData[0]?.small_image}}"  alt="" id="uploadPreview2">
-                        <!-- <span class="text-danger"
-                        *ngIf="createRace.get('city')?.invalid && createRace.get('city')?.touched">
-                        <div *ngIf="createRace.get('city')?.errors?.['required']">
-                          Please enter race city
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <label for="Name" class="mb-2 ct_fw_600">URL Link</label>
+            <input type="text" placeholder="Enter Venue Name" id="exampleInputFile1" class="form-control"
+              [(ngModel)]="sidebar_link">
+
+            <!-- <span class="text-danger"
+                        *ngIf="createRace.get('race_venue')?.invalid && createRace.get('race_venue')?.touched">
+                        <div *ngIf="createRace.get('race_venue')?.errors?.['required']">
+                          Please enter race venue
                         </div>
                       </span> -->
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <div class="form-group">
-                        <label for="Name" class="mb-2 ct_fw_600">Full image (Size should be 728*90)</label>
-                        <input type="file"  (change)="PreviewImage('big')" placeholder="Enter Venue Name" id="exampleInputFile3" class="form-control"   accept="image/png, image/svg+xml, image/gif, image/jpeg">
-                        <img class="ct_upload_img_121" src="{{imageURl}}/{{imageData[0]?.big_image}}"  alt="" id="uploadPreview3">
-                        <!-- <span class="text-danger"
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+
+          <div class="form-group">
+            <label for="Name" class="mb-2 ct_fw_600">Small image (Size should be 468*60)</label>
+            <input type="file" (change)="PreviewImage('small')" placeholder="Enter Venue Name" id="exampleInputFile2"
+              class="form-control" accept="image/png, image/svg+xml, image/gif, image/jpeg">
+            <img class="ct_upload_img_121" src="{{imageURl}}/{{imageData[0]?.small_image}}" alt="" id="uploadPreview2">
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+
+          <div class="form-group">
+            <label for="Name" class="mb-2 ct_fw_600">URl Link</label>
+            <input type="text" placeholder="Enter url link" class="form-control" [(ngModel)]="small_link">
+
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <label for="Name" class="mb-2 ct_fw_600">Full image (Size should be 728*90)</label>
+            <input type="file" (change)="PreviewImage('big')" placeholder="Enter Venue Name" id="exampleInputFile3"
+              class="form-control" accept="image/png, image/svg+xml, image/gif, image/jpeg">
+            <img class="ct_upload_img_121" src="{{imageURl}}/{{imageData[0]?.big_image}}" alt="" id="uploadPreview3">
+            <!-- <span class="text-danger"
                         *ngIf="createRace.get('race_number')?.invalid && createRace.get('race_number')?.touched">
                         <div *ngIf="createRace.get('race_number')?.errors?.['required']">
                           Please enter race number
                         </div>
                       </span> -->
-                    </div>
-                </div>
-                 
-                  
-                  
-                 
-
-                    <div class="d-flex border-0 mt-4 gap-2">
-                  
-                        <button type="button" class="ct_custom_btn" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="ct_custom_btn" (click)="onUpdate()">Update
-                            </button>
-                    
-                    </div>
-                 
-              </div>
-            
+          </div>
         </div>
+        <div class="col-md-6 mb-3">
+
+          <div class="form-group">
+            <label for="Name" class="mb-2 ct_fw_600">URl Link</label>
+            <input type="text"  placeholder="Enter url link" 
+              class="form-control" [(ngModel)]="big_link" >
+            
+          </div>
+        </div>
+
+
+
+
+
+        <div class="d-flex border-0 mt-4 gap-2">
+
+          <button type="button" class="ct_custom_btn" data-bs-dismiss="modal" >Cancel</button>
+          <button type="button" class="ct_custom_btn" (click)="onUpdate()">Update
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
+  </div>
 </div>
-
-
 
