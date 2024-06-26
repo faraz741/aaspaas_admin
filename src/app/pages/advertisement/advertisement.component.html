@@ -28,14 +28,14 @@
                                         aria-label="Date: Activate to invert sorting" tabindex="0"><span
                                             class="dt-column-title" role="button">S No.</span><span
                                             class="dt-column-order"></span></th>
-                                    <th data-dt-column="1" rowspan="1" colspan="1"
+                                    <!-- <th data-dt-column="1" rowspan="1" colspan="1"
                                         class="dt-orderable-asc dt-orderable-desc"
                                         aria-label="Daily Bible verse/s for this date: Activate to sort" tabindex="0">
                                         <span class="dt-column-title" role="button">Image</span><span class="dt-column-order"></span>
-                                    </th>
+                                    </th> -->
                                     <th data-dt-column="2" rowspan="1" colspan="1"
                                     class="dt-orderable-asc dt-orderable-desc" aria-label="Action: Activate to sort"
-                                    tabindex="0"><span class="dt-column-title" role="button">Link</span><span
+                                    tabindex="0"><span class="dt-column-title" role="button">Html or Script code</span><span
                                         class="dt-column-order"></span></th>
                                     <th data-dt-column="2" rowspan="1" colspan="1"
                                         class="dt-orderable-asc dt-orderable-desc" aria-label="Action: Activate to sort"
@@ -46,11 +46,11 @@
                             <tbody>
                                 <tr *ngFor="let row of data; let i = index">
                                     <td>{{i+1}}</td>
-                                    <td>
+                                    <!-- <td>
                                         <div class="ct_event_img">
                                             <img [src]="'http://52.204.188.107:4000/profile/' + row.image" alt="img">
                                         </div>
-                                    </td>
+                                    </td> -->
                                     <td>{{row.links}}</td>
                                     <td>
                                         <button class="ct_action_btn ct_dlt_btn">
