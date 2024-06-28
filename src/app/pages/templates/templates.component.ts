@@ -96,4 +96,27 @@ export class TemplatesComponent {
     }
   }
 
+  deleteTempalte(id:any) {
+
+  
+    const formURlData = new URLSearchParams();
+
+      formURlData.set('ids', id.toString());
+    
+    this.service.postAPI('deleteTempalte', formURlData.toString()).subscribe({
+      next: (resp) => {
+
+        if (resp.success == true) {
+   this.getData()
+      }
+    },
+      error: (error) => {
+        //this.loading = false;
+      
+        console.error('Login error:', error.message);
+      }
+    });
+
+  };
+
 }
