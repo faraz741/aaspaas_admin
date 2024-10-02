@@ -1,0 +1,556 @@
+<div class="ct_middle_cnt">
+    <div class="mt-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+            <h4 class="mb-0 ct_h2 ">Shops</h4>
+            <button type="button" class="ct_custom_btn w-auto py-2" data-bs-toggle="modal" data-bs-target="#ct_supplier"
+                (click)="onAddButon()">
+                + Add shop
+            </button>
+        </div>
+
+
+        <div class="table-responsive ct_custom_table">
+            <div id="example_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
+                <div class="row mt-2 justify-content-between">
+                    <div class="col-md-auto me-auto ">
+                    </div>
+
+                </div>
+                <div class="row mt-2 justify-content-md-center">
+                    <div class="col-12 ">
+                        <p-table
+                            class="table table-striped dataTable mb-0 w-100 p-datatable-customers p-datatable-gridlines p-3"
+                            aria-describedby="example_info" #dt [value]="filteredData" [rowHover]="true" [rows]="20"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="['shopName','primaryCategoryName' ,'area']">
+
+                            <ng-template pTemplate="caption">
+                                <div class="flex">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="clear(dt)"></button>
+                                    <span class="p-input-icon-left ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="min-width: 5rem">#</th>
+                                    <th pSortableColumn="shopName" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Shop Name
+                                            <p-sortIcon field="shopName"></p-sortIcon>
+                                           
+                                        </div>
+                                    </th>
+                                    <th style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Address
+                                        </div>
+                                    </th>
+                                    <th style="min-width:15rem">
+                                        <div class="flex align-items-center">
+                                            Area
+                                            <p-columnFilter field="area" matchMode="in" display="menu"
+                                                [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                                <ng-template pTemplate="header">
+                                                    <div class="px-3 pt-3 pb-0">
+                                                        <span class="font-bold">Area Picker</span>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                    <p-multiSelect [ngModel]="value" [options]="areaData"
+                                                        placeholder="Any" optionLabel="area" optionValue="area"
+                                                        (onChange)="filter($event.value)">
+
+                                                        <ng-template let-option pTemplate="item">
+                                                            <div class="inline-block vertical-align-middle">
+                                                                <span class="ml-1 mt-1">{{ option.area }}</span>
+                                                            </div>
+                                                        </ng-template>
+                                                    </p-multiSelect>
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th style="min-width:15rem">
+                                        <div class="flex align-items-center">
+                                            Primary Category
+                                            <p-columnFilter field="primaryCategoryName" matchMode="in" display="menu"
+                                                [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                                <ng-template pTemplate="header">
+                                                    <div class="px-3 pt-3 pb-0">
+                                                        <span class="font-bold">Category Picker</span>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                    <p-multiSelect [ngModel]="value" [options]="categorydata"
+                                                        placeholder="Any" optionLabel="category_name"
+                                                        optionValue="category_name" (onChange)="filter($event.value)">
+
+                                                        <ng-template let-option pTemplate="item">
+                                                            <div class="inline-block vertical-align-middle">
+                                                                <span class="ml-1 mt-1">{{ option.category_name
+                                                                    }}</span>
+                                                            </div>
+                                                        </ng-template>
+                                                    </p-multiSelect>
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
+
+
+                                    <th pSortableColumn="categories" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Categories
+                                            <p-columnFilter field="category_name" matchMode="in" display="menu"
+                                                [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                                <ng-template pTemplate="header">
+                                                    <div class="px-3 pt-3 pb-0">
+                                                        <span class="font-bold">Category picker</span>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template pTemplate="filter">
+                                                    <p-multiSelect [ngModel]="selectedFilcategory"
+                                                        [options]="filteredCategory" placeholder="Any"
+                                                        (onChange)="filter2($event.value)" optionLabel="category_name">
+                                                        <ng-template let-option pTemplate="item">
+                                                            <div class="inline-block vertical-align-middle">
+                                                                <span class="ml-1 mt-1">{{ option.category_name
+                                                                    }}</span>
+                                                            </div>
+                                                        </ng-template>
+                                                    </p-multiSelect>
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th style="width: 5rem">Action</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-customer>
+                                <tr class="p-selectable-row">
+                                    <td class="customer">{{ rowIndex + 1 }}</td>
+                                    <td>
+                                        <span class="p-column-title">Shop Name</span>
+                                        {{ customer.shopName }}
+                                    </td>
+                                    <td>
+                                        <span class="p-column-title">Address</span>
+                                        {{ customer.address }}
+                                    </td>
+                                    <td>
+                                        <span class="p-column-title">Area</span>
+                                        {{ customer.area }}
+                                    </td>
+                                    <td>
+                                        <span class="p-column-title">Primary Category</span>
+                                        {{ (customer.primaryCategoryName) }}
+                                    </td>
+
+                                    <td>
+                                        <span class="p-column-title">Categories</span>
+                                        <div *ngFor="let category of customer.categoryDetails">
+                                            {{ category.category_name }}
+                                        </div>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-secondary" icon="pi pi-cog"
+                                                data-bs-toggle="modal" data-bs-target="#Editct_supplier"
+                                                (click)="Onupdatebutton(customer)"><i class="fas fa-pen"></i></button>
+                                            <button type="button" class="btn btn-secondary" icon="pi pi-cog"
+                                                data-bs-toggle="modal" data-bs-target="#Editct_supplier"><i
+                                                    class="fas fa-trash"></i></button>
+                                            <!-- <button  type="button" class="btn btn-secondary" icon="pi pi-cog" [routerLink]="['/main/shopImages']" [queryParams]="{id:customer._id}" (click)="navigateWithImages(customer.shopImages)">Images</button> -->
+                                            <button type="button" class="btn btn-secondary" icon="pi pi-cog"
+                                                (click)="navigateWithImages(customer._id)">Images</button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade Committed_Price" id="ct_supplier" tabindex="-1" aria-labelledby="ct_supplier_detailLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="width: 800px; height: 800px;">
+            <div class="modal-body py-3">
+                <div class="">
+                    <h4 class="mb-2 text-center"><strong>Add New Shop</strong></h4>
+                    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value , 1)">
+                        <button type="submit" class="ct_custom_btn w-auto py-2">Add Shop</button>
+                        <div class="row">
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Shop name</label>
+                                <input type="text" placeholder="Enter Name" class="form-control"
+                                formControlName="shopName">
+                                <div *ngIf="myForm.controls['shopName']?.invalid && (myForm.controls['shopName']?.dirty || myForm.controls['shopName']?.touched)"
+                                    class="text-danger">
+                                    Shop name is required.
+                                </div>
+                            </div>
+                            <div class="col-12 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600 d-block">Select Input Type</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="radioCoordinate"
+                                        formControlName="inputType" value="coordinate"
+                                        [checked]="myForm.controls['inputType'].value === 'coordinate'">
+                                    <label class="form-check-label" for="radioCoordinate">Coordinate</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="radioUrl"
+                                        formControlName="inputType" value="url"
+                                        [checked]="myForm.controls['inputType'].value === 'url'">
+                                    <label class="form-check-label" for="radioUrl">URL</label>
+                                </div>
+                                <!-- Validation Messages -->
+                                <div *ngIf="selectLatitudeType" class="text-danger">
+                                    Please select location type
+                                </div>
+
+
+                                <!-- Single Input Field -->
+                                <input type="text"
+                                    [placeholder]="myForm.controls['inputType'].value === 'url' ? 'Enter URL' : 'Enter latitude,longitude'"
+                                    class="form-control mt-2" formControlName="urlValue">
+                                <div *ngIf="invalidUrl" class="text-danger">
+                                    Please enter correct google map url
+                                </div>
+                                <div *ngIf="invalidLatitude" class="text-danger">
+                                    Please enter like this 22.736465, 75.913927
+                                </div>
+
+                            </div>
+                            <div class="col-md-12 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Full Addresss</label>
+                                <textarea rows="2" type="text" placeholder="Enter address of shop" class="form-control"
+                                    formControlName="address"></textarea>
+                                <div *ngIf="myForm.controls['address']?.invalid && (myForm.controls['address'].dirty || myForm.controls['address'].touched)"
+                                    class="text-danger">
+                                    Address is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Type</label>
+                                <div class=" flex justify-content-center">
+                                    <p-dropdown [options]="shopType" optionLabel="name" optionValue="name" [(ngModel)]="selectedShopType" [ngModelOptions]="{standalone: true}" (onChange)="onTypeChange($event)"
+                                         class="form-control ct_custom_dropdown" >
+                                    </p-dropdown>
+                                </div>
+                                <div *ngIf="myForm.controls['shopType']?.invalid && (myForm.controls['shopType']?.dirty || myForm.controls['shopType']?.touched)"
+                                    class="text-danger">
+                                    Shop type is required.
+                                </div>
+                            </div>
+                       
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Pin code</label>
+                                <input type="text" placeholder="Enter pin code" class="form-control"
+                                    formControlName="pincode" (keyup)="getAreaList($event , '0')" autocomplete="on">
+                                    <ul *ngIf="filteredSuggestions.length > 0" class="suggestion-list">
+                                        <li *ngFor="let suggestion of filteredSuggestions" (click)="selectSuggestion(suggestion)">
+                                            {{ suggestion }}
+                                        </li>
+                                    </ul>
+                                <div *ngIf="myForm.controls['pincode']?.invalid && (myForm.controls['pincode'].dirty || myForm.controls['pincode'].touched)"
+                                    class="text-danger">
+                                    Address is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group ">
+                                <label class="mb-2 ct_fw_600">Area</label>
+                                <div class=" flex justify-content-center">
+                                    <p-dropdown class="ct_custom_dropdown form-control" [options]="areaList" [(ngModel)]="selectedArea"
+                                        [ngModelOptions]="{standalone: true}" optionLabel="areaname"
+                                        optionValue="areaname" [filter]="true" filterBy="areaname" [showClear]="true"
+                                        name="areaname" placeholder="Enter pincode">
+
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                   
+
+
+
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Owner name</label>
+                                <input type="text" placeholder="Enter owner Name" class="form-control"
+                                    formControlName="ownerName">
+                                <div *ngIf="myForm.controls['ownerName']?.invalid && (myForm.controls['ownerName'].dirty || myForm.controls['ownerName'].touched)"
+                                    class="text-danger">
+                                    Owner name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Phone no</label>
+                                <input type="number" placeholder="Enter Name" class="form-control"
+                                    formControlName="phoneNo">
+                                <div *ngIf="myForm.controls['phoneNo']?.invalid && (myForm.controls['phoneNo'].dirty || myForm.controls['phoneNo'].touched)"
+                                    class="text-danger">
+                                    Phone number is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 ">
+                                <label class="mb-2 ct_fw_600">Primary Category</label>
+                                <p-dropdown class="form-control ct_custom_dropdown" [options]="categorydata" optionLabel="category_name" optionValue="_id"
+                                    placeholder="Select category" [filter]="true" filterBy="category_name"
+                                    [(ngModel)]="selectedPrimaryCategory" [ngModelOptions]="{standalone: true}" />
+                                <div *ngIf="myForm.controls['category']?.invalid && (myForm.controls['category'].dirty || myForm.controls['category'].touched)"
+                                    class="text-danger">
+                                    Category is required.
+                                </div>
+                            </div>
+                            <div class="col-6 ct_formField mb-3 ">
+                                <label class="mb-2 ct_fw_600">Other Category</label>
+                                <p-multiSelect class="form-control ct_multiselet" [options]="categorydata"
+                                    [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone: true}"
+                                    optionLabel="category_name" optionValue="_id" display="chip" placeholder="Choose secondary category"></p-multiSelect>
+                                <div *ngIf="myForm.controls['category']?.invalid && (myForm.controls['category'].dirty || myForm.controls['category'].touched)"
+                                    class="text-danger">
+                                    Category is required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Operating Days</label>
+
+                                <p-multiSelect class="form-control ct_multiselet" [options]="days" [(ngModel)]="selectedDate"
+                                    [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="label" placeholder="select days"
+                                    display="chip"></p-multiSelect>
+
+
+                                <!-- <div *ngFor="let day of days">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" [id]="day.name" [formControlName]="day.name">
+                                        <label class="form-check-label" [for]="day.name">{{ day.label }}</label>
+                                    </div>
+                                </div> -->
+                                <div *ngIf="myForm.controls['days']?.invalid && (myForm.controls['days'].dirty || myForm.controls['days'].touched)"
+                                    class="text-danger">
+                                    At least one operating day is required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-4  ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Opening Time</label>
+                                <input type="time" class="form-control" formControlName="openTime"  value="15:32:55" [defaultValue]="'15:00:50'">
+                                <div *ngIf="myForm.controls['openTime']?.invalid && (myForm.controls['openTime'].dirty || myForm.controls['openTime'].touched)"
+                                    class="text-danger">
+                                    Opening time is required.
+                                </div>
+                            </div>
+                            <div class="col-md-4 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Closing Time</label>
+                                <input type="time" class="form-control" formControlName="closeTime">
+                                <div *ngIf="myForm.controls['closeTime']?.invalid && (myForm.controls['closeTime'].dirty || myForm.controls['closeTime'].touched)"
+                                    class="text-danger">
+                                    Closing time is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer justify-content-center border-0 py-0 mt-2">
+                            <button type="button" class="ct_custom_btn py-2 w-auto"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="ct_custom_btn w-auto py-2">Add Template</button>
+                            <button hidden type="button" class="btn btn-secondary w-auto py-2" #closeModal2
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- edit.
+  -->
+<div class="modal fade Committed_Price" id="Editct_supplier" tabindex="-1" aria-labelledby="ct_supplier_detailLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="width: 800px; height: 800px;">
+            <div class="modal-body py-3">
+                <div class="">
+                    <h4 class="mb-2 text-center"><strong>Edit Shops</strong></h4>
+                    <form [formGroup]="myEditForm" (ngSubmit)="onSubmit(myEditForm.value, 2)">
+                        <div class="row">
+
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Shop name</label>
+                                <input type="text" placeholder="Enter Name" class="form-control"
+                                    formControlName="shopName">
+                                <div *ngIf="myEditForm.controls['shopName']?.invalid && (myEditForm.controls['shopName']?.dirty || myEditForm.controls['shopName']?.touched)"
+                                    class="text-danger">
+                                    Shop name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Type</label>
+                                <div class=" flex justify-content-center">
+                                    <p-dropdown [options]="shopType" optionLabel="name" optionValue="name"
+                                        formControlName="shopType" class="form-control ct_custom_dropdown">
+
+                                    </p-dropdown>
+                                </div>
+                               
+                            </div>
+                            <div class="col-md-12 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Address</label>
+                                <textarea type="text" placeholder="Enter Name" class="form-control"
+                                    formControlName="address"></textarea>
+                                <div *ngIf="myEditForm.controls['address']?.invalid && (myEditForm.controls['address'].dirty || myEditForm.controls['address'].touched)"
+                                    class="text-danger">
+                                    Address is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Pin code</label>
+                                <input type="number" placeholder="Enter pin code" class="form-control"
+                                    formControlName="pincode" (keyup)="getAreaList($event , '0')">
+                                <div *ngIf="myEditForm.controls['pincode']?.invalid && (myEditForm.controls['pincode'].dirty || myEditForm.controls['pincode'].touched)"
+                                    class="text-danger">
+                                    Pincode is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Area</label>
+                                <div class=" flex justify-content-center">
+                                    <p-dropdown [options]="areaList"  [(ngModel)]="selectedArea" [ngModelOptions]="{standalone: true}"   optionLabel="areaname"
+                                        optionValue="areaname" [filter]="true" filterBy="areaname" [showClear]="true" class="form-control ct_custom_dropdown"
+                                         placeholder="Choose Area">
+
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-12 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Select Input Type</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="radioCoordinate"
+                                        formControlName="inputType" value="coordinate"
+                                        [checked]="myEditForm.controls['inputType'].value === 'coordinate'">
+                                    <label class="form-check-label" for="radioCoordinate">Coordinate</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="radioUrl"
+                                        formControlName="inputType" value="url"
+                                        [checked]="myEditForm.controls['inputType'].value === 'url'">
+                                    <label class="form-check-label" for="radioUrl">URL</label>
+                                </div>
+                                <!-- Validation Messages -->
+                                <div *ngIf="selectLatitudeType" class="text-danger">
+                                    Please select location type
+                                </div>
+
+
+                                <!-- Single Input Field -->
+                                <input type="text"
+                                    [placeholder]="myEditForm.controls['inputType'].value === 'url' ? 'Enter URL' : 'Enter latitude,longitude'"
+                                    class="form-control mt-2" formControlName="urlValue">
+                                <div *ngIf="invalidUrl" class="text-danger">
+                                    Please enter correct google map url
+                                </div>
+                                <div *ngIf="invalidLatitude" class="text-danger">
+                                    Please enter like this 22.736465, 75.913927
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Owner name</label>
+                                <input type="text" placeholder="Enter owner Name" class="form-control"
+                                    formControlName="ownerName">
+                                <div *ngIf="myEditForm.controls['ownerName']?.invalid && (myEditForm.controls['ownerName'].dirty || myEditForm.controls['ownerName'].touched)"
+                                    class="text-danger">
+                                    Owner name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Phone no</label>
+                                <input type="number" placeholder="Enter Name" class="form-control"
+                                    formControlName="phoneNo">
+                                <div *ngIf="myEditForm.controls['phoneNo']?.invalid && (myEditForm.controls['phoneNo'].dirty || myEditForm.controls['phoneNo'].touched)"
+                                    class="text-danger">
+                                    Phone number is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 ">
+                                <label class="mb-2 ct_fw_600">Primary Category</label>
+                                <p-dropdown [options]="categorydata" optionLabel="category_name" optionValue="_id"
+                                    placeholder="Select category" [filter]="true" filterBy="category_name" class="form-control ct_custom_dropdown"
+                                    [(ngModel)]="selectedPrimaryCategory" [ngModelOptions]="{standalone: true}" />
+                                <div *ngIf="myEditForm.controls['category']?.invalid && (myEditForm.controls['category'].dirty || myEditForm.controls['category'].touched)"
+                                    class="text-danger">
+                                    Primary Category is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Other Category</label>
+                                <p-multiSelect class="form-control ct_multiselet" [options]="categorydata"
+                                    [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone: true}"
+                                    optionLabel="category_name" optionValue="_id" display="chip"></p-multiSelect>
+                                <div *ngIf="myEditForm.controls['category']?.invalid && (myEditForm.controls['category'].dirty || myEditForm.controls['category'].touched)"
+                                    class="text-danger">
+                                    Category is required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Operating Days</label>
+                                <p-multiSelect class="form-control ct_multiselet" [options]="days" [(ngModel)]="selectedDate"
+                                    [ngModelOptions]="{standalone: true}" optionLabel="label" optionValue="label"
+                                    display="chip"></p-multiSelect>
+
+                            </div>
+
+                            <div class="col-md-4 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Opening Time</label>
+                                <input type="time" class="form-control" formControlName="openTime">
+                                <div *ngIf="myEditForm.controls['openTime']?.invalid && (myEditForm.controls['openTime'].dirty || myEditForm.controls['openTime'].touched)"
+                                    class="text-danger">
+                                    Opening time is required.
+                                </div>
+                            </div>
+                            <div class="col-md-4 ct_formField mb-3 form-group">
+                                <label class="mb-2 ct_fw_600">Closing Time</label>
+                                <input type="time" class="form-control" formControlName="closeTime">
+                                <div *ngIf="myEditForm.controls['closeTime']?.invalid && (myEditForm.controls['closeTime'].dirty || myEditForm.controls['closeTime'].touched)"
+                                    class="text-danger">
+                                    Closing time is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center border-0 py-0 mt-2">
+                            <button type="button" class="ct_custom_btn py-2 w-auto" data-bs-dismiss="modal"
+                                #closeModal3>Cancel</button>
+                            <button type="submit" class="ct_custom_btn w-auto py-2">Update Shops</button>
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

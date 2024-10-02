@@ -46,10 +46,10 @@ export class AdvertisementComponent {
       const formURlData = new FormData();
       const fileInput = document.getElementById("exampleInputFile") as HTMLInputElement;
 
-      if (fileInput.files && fileInput.files[0]) {
-        const uploadedFile = fileInput.files[0];
-        formURlData.append('file', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
-      }
+      // if (fileInput.files && fileInput.files[0]) {
+      //   const uploadedFile = fileInput.files[0];
+      //   formURlData.append('file', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
+      // }
       formURlData.set('links', this.newForm.value.links)
       this.service.postAPI('uploadsuggested_links', formURlData).subscribe({
         next: (resp) => {

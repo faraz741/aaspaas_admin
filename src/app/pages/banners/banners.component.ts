@@ -42,24 +42,10 @@ export class BannersComponent {
   onUpdate() {
     console.log("cliekd");
 
-    const fileInput = document.getElementById("exampleInputFile1") as HTMLInputElement;
-    const fileInput2 = document.getElementById("exampleInputFile2") as HTMLInputElement;
-    const fileInput3 = document.getElementById("exampleInputFile3") as HTMLInputElement;
     let formData = new FormData();
 
 
-    if (fileInput.files && fileInput.files[0]) {
-      const uploadedFile = fileInput.files[0];
-      formData.append('sidebar_image', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
-    }
-    if (fileInput2.files && fileInput2.files[0]) {
-      const uploadedFile = fileInput2.files[0];
-      formData.append('small_image', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
-    }
-    if (fileInput3.files && fileInput3.files[0]) {
-      const uploadedFile = fileInput3.files[0];
-      formData.append('big_image', uploadedFile, uploadedFile.name); // Append the image file to the FormData object
-    }
+   
 
     formData.append('sidebar_link', this.sidebar_link); 
     formData.append('small_link',this.small_link);
@@ -73,7 +59,7 @@ export class BannersComponent {
           // formData.reset();
           this.toastr.success(res.message, ' ');
           this.getData()
-          fileInput.value = ''
+        
         } else {
 
         }

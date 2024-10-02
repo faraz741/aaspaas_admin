@@ -3,7 +3,157 @@
 /* // regular style toast */
 @import 'ngx-toastr/toastr';
 
+
+
+/* @import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css"; */
+
+/* Core Data Grid CSS */
+
 .error-message {
     color: red;
   }
   
+
+  .p-fileupload-buttonbar{
+    height : 48px !important;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-inline: 10px;
+}
+
+.p-ripple.p-element.p-button.p-component{
+  padding: 4px 10px
+}
+
+
+
+
+.p-fileupload-row img{ 
+height: 100px;
+width: 100px;
+object-fit: cover;
+}
+
+.p-fileupload-row{ 
+margin-bottom: 10px;
+}
+
+
+
+/* You can add global styles to this file, and also import other style files */
+
+/* // regular style toast */
+@import 'ngx-toastr/toastr';
+
+
+
+/* @import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css"; */
+
+/* Core Data Grid CSS */
+
+.error-message {
+    color: red;
+  }
+  
+
+  .p-fileupload-buttonbar{
+    height : 48px !important;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-inline: 10px;
+}
+
+.p-ripple.p-element.p-button.p-component{
+  padding: 4px 10px
+}
+
+
+
+
+.p-fileupload-row img{ 
+height: 100px;
+width: 100px;
+object-fit: cover;
+}
+
+.p-fileupload-row{ 
+margin-bottom: 10px;
+}
+
+.ct_custom_dropdown .p-dropdown {
+  border: 0px;
+  width: 100%;
+  box-shadow: unset;
+}
+
+.ct_custom_dropdown .p-dropdown:focus{
+  box-shadow: unset;
+}
+
+.ct_custom_dropdown .p-element li{
+  padding: 4px 10px;
+}
+.ct_custom_dropdown .p-dropdown-items{
+  padding-left: 0px;
+}
+.ct_multiselet .p-multiselect {
+  width: 100%;
+  box-shadow: unset;
+
+  border: 0px;
+}
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item{
+  padding: 5px 10px;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item span{
+  padding-left: 5px;
+}
+
+.ct_multiselet .p-multiselect-items{
+padding-left: 0px;
+}
+
+.ct_multiselet .p-multiselect-filter-container searchicon.p-element.p-icon-wrapper.ng-star-inserted svg {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+}
+.p-checkbox.p-component.ng-star-inserted {
+  margin-right: 2px;
+}
+.p-multiselect-header.ng-star-inserted {
+  margin-top: 9px;
+}
+#ct_supplier{
+  z-index: 99999999;
+}
+.ct_fw_600{
+  font-weight: 600;
+}
+span.p-input-icon-left.ml-auto input {
+  height: 34px;
+  padding: 10px;
+}
+
+span.p-input-icon-left.ml-auto i {
+  position: absolute;
+  top: 50%;
+  right: 10px !important;
+  display: block;
+  margin-left: auto;
+  transform: translateY(-50%);
+  left: auto;
+}
+
+.p-dropdown-clear-icon {
+  position: absolute;
+  top: 49% !important;
+  margin-top: -.5rem;
+}

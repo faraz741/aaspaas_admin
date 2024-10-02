@@ -1,0 +1,12 @@
+{
+    "/api": {
+      "target": "https://www.justdial.com",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      },
+      "logLevel": "debug"
+    }
+  }
+  

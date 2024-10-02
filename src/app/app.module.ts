@@ -15,8 +15,33 @@ import { BannersComponent } from './pages/banners/banners.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeadersInterceptor } from './services/interceptor/headers.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule} from '@angular/fire/compat';
+import { AngularFireStorageModule} from '@angular/fire/compat/storage';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { AnimateModule } from 'primeng/animate';
+import { ItemsComponent } from './pages/items/items.component';
+import { AllItemsComponent } from './pages/all-items/all-items.component';
+import { ShopsComponent } from './pages/shops/shops.component';
+import { CacheInterceptor } from './cache.interceptor';
+
+import {ToastModule} from 'primeng/toast';
+import {CalendarModule} from 'primeng/calendar';
+import {SliderModule} from 'primeng/slider';
+
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {InputTextModule} from 'primeng/inputtext';
+import { environment } from 'src/environments/environment.development';
+import { ShopsImagesComponent } from './pages/shops/shops-images/shops-images.component';
+import {FileUploadModule} from 'primeng/fileupload';
+import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
+import { MessageService } from 'primeng/api'; // PrimeNG MessageService
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,18 +53,36 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TemplatesComponent,
     LoginComponent,
     AdvertisementComponent,
-    BannersComponent
+    BannersComponent,
+    ItemsComponent,
+    AllItemsComponent,
+    ShopsComponent,
+    ShopsImagesComponent
+
   ],
   imports: [
     BrowserModule,
+    TableModule,
     AppRoutingModule,  
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    InputTextModule,
+    DropdownModule,
+    ButtonModule,
+    ContextMenuModule,
     ToastrModule.forRoot(), 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MultiSelectModule,
+    ToastModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    FileUploadModule,
+    AgGridAngular
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true }],
+  providers:[MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

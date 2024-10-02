@@ -1,0 +1,144 @@
+<div class="ct_middle_cnt">
+    <div class="mt-1 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+            <h4 class="mb-0 ct_h2 ">Items</h4>
+          
+        </div>
+
+
+        <div class="table-responsive ct_custom_table">
+            <div id="example_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
+                <div class="row mt-2 justify-content-between">
+                    <div class="col-md-auto me-auto ">
+                    </div>
+                    
+                </div>
+                <div class="row mt-2 justify-content-md-center">
+                    <div class="col-12 ">
+                        <p-table class="table table-striped dataTable mb-0 w-100" id="example" aria-describedby="example_info"
+                        #dt
+                        [value]="data"
+                       
+                        dataKey="id"
+                        [rowHover]="true"
+                        [rows]="20"
+                        [showCurrentPageReport]="true"
+                        [rowsPerPageOptions]="[10, 25, 50]"
+                     
+                        [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [filterDelay]="0"
+                        [globalFilterFields]="['item_name']"  >
+                           <ng-template pTemplate="caption">
+                            <div class="table-header">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text" class="form-control" (input)="applyFilter($event)" placeholder="Global Search" />
+                                </span>
+                            </div>
+                           </ng-template>
+                           <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:3rem">#</th>
+                                <th pSortableColumn="name" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Item Name
+                                        <p-sortIcon field="name"></p-sortIcon>
+                                        <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="country.name" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        English Name
+                                        <p-sortIcon field="country.name"></p-sortIcon>
+                                        <p-columnFilter type="text" field="country.name" display="menu" class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="country.name" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Category
+                                        <p-sortIcon field="country.name"></p-sortIcon>
+                                        <p-columnFilter type="text" field="country.name" display="menu" class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="country.name" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Clicks
+                                        <p-sortIcon field="country.name"></p-sortIcon>
+                                        <p-columnFilter type="text" field="country.name" display="menu" class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                              
+                                <th style="width: 5rem"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-customer>
+                            <tr class="p-selectable-row">
+                                <td>{{rowIndex +1}}</td>
+                                <td>
+                                    <span class="p-column-title">Category Name</span>
+                                    {{ customer.item_name }}
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Clicks</span>
+                                    {{ customer.item_name_english }}
+                                  
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Clicks</span>
+                                    {{ customer.category_name }}
+                                  
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Clicks</span>
+                                    {{ customer.click }}
+                                  
+                                </td>
+                            
+                               
+                              
+                                <td style="text-align: center">
+                                    <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"  [routerLink]="['/main/items',customer._id]">Items</button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                       
+
+                            <tfoot></tfoot>
+                        </p-table>
+                    </div>
+                </div>
+                <!-- <div class="row mt-2 justify-content-between">
+                    <div class="col-md-auto me-auto ">
+                        <div class="dt-info" aria-live="polite" id="example_info" role="status">Showing 1 to 10 of 10
+                            entries</div>
+                    </div>
+                    <div class="col-md-auto ms-auto ">
+                        <div class="dt-paging paging_full_numbers">
+                            <ul class="pagination">
+                                <li class="dt-paging-button page-item disabled"><a class="page-link first"
+                                        aria-controls="example" aria-disabled="true" aria-label="First"
+                                        data-dt-idx="first" tabindex="-1">«</a></li>
+                                <li class="dt-paging-button page-item disabled"><a class="page-link previous"
+                                        aria-controls="example" aria-disabled="true" aria-label="Previous"
+                                        data-dt-idx="previous" tabindex="-1">‹</a></li>
+                                <li class="dt-paging-button page-item active"><a href="#" class="page-link"
+                                        aria-controls="example" aria-current="page" data-dt-idx="0" tabindex="0">1</a>
+                                </li>
+                                <li class="dt-paging-button page-item disabled"><a class="page-link next"
+                                        aria-controls="example" aria-disabled="true" aria-label="Next"
+                                        data-dt-idx="next" tabindex="-1">›</a></li>
+                                <li class="dt-paging-button page-item disabled"><a class="page-link last"
+                                        aria-controls="example" aria-disabled="true" aria-label="Last"
+                                        data-dt-idx="last" tabindex="-1">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

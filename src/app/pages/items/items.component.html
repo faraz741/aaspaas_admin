@@ -1,0 +1,158 @@
+<div class="ct_middle_cnt">
+    <div class="mt-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+            <h4 class="mb-0 ct_h2 ">Category -  {{categoryName}}</h4>
+            <button type="button" class="ct_custom_btn w-auto py-2" (click)="goBack()" >
+             Back
+            </button>
+            <button type="button" class="ct_custom_btn w-auto py-2" data-bs-toggle="modal" data-bs-target="#ct_supplier_detail">
+                + Add items
+            </button>
+        </div>
+
+
+        <div class="table-responsive ct_custom_table">
+            <div id="example_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
+                <div class="row mt-2 justify-content-between">
+                    <div class="col-md-auto me-auto ">
+                    </div>
+                    
+                </div>
+                <div class="row mt-2 justify-content-md-center">
+                    <div class="col-12 ">
+                        <p-table class="table table-striped dataTable mb-0 w-100" id="example" aria-describedby="example_info"
+                        #dt
+                        [value]="data"
+                       
+                        dataKey="id"
+                        [rowHover]="true"
+                        [rows]="10"
+                        [showCurrentPageReport]="true"
+                        [rowsPerPageOptions]="[10, 25, 50]"
+                     
+                        [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [filterDelay]="0"
+                        [globalFilterFields]="['category_name']"  >
+                           <ng-template pTemplate="caption">
+                            <div class="table-header">
+                                List of items --<span class="p-input-icon-left">
+                                   
+                                    <input class="mx-3 form-control" pInputText type="text" (input)="applyFilter($event)" placeholder="Global Search" />
+                                </span>
+                            </div>
+                           </ng-template>
+                           <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:3rem">#</th>
+                                <th pSortableColumn="name" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Item name
+                                        <p-sortIcon field="name"></p-sortIcon>
+                                        <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="country.name" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        English name
+                                        <p-sortIcon field="country.name"></p-sortIcon>
+                                        <p-columnFilter type="text" field="country.name" display="menu" class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                              
+                                <th style="width: 5rem"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-customer>
+                            <tr class="p-selectable-row">
+                                <td>{{rowIndex +1}}</td>
+                                <td>
+                                    <span class="p-column-title">Item name</span>
+                                    {{ customer.item_name }}
+                                </td>
+                                <td>
+                                    <span class="p-column-title">English name</span>
+                                    {{ customer.item_name_english }}
+                                </td>
+                               
+                                <td style="text-align: center">
+                                    <button pButton type="button" class="btn p-button-secondary"  (click)="deleteItems(customer._id)" ><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                       
+
+                            <tfoot></tfoot>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="ct_supplier_detail" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body py-5">
+                <div class="">
+                    <h4 class="mb-5 text-center"><strong>Add New item</strong></h4>
+                    <form #itemForm="ngForm" (ngSubmit)="onSubmit(itemForm)">
+                        <div class="ct_formField mb-3 form-group">
+                            <label for="" class="mb-2 ct_fw_600">Item name</label>
+                            <input type="text"  id="exampleInputFile"
+                                placeholder="Enter Venue Name" class="form-control"
+                                 name="itemName" ngModel (keyup)="searchItems($event)">
+                          
+                        </div>
+                        <div class="ct_formField mb-3 form-group">
+                            <label for="" class="mb-2 ct_fw_600">English name</label>
+                            <input type="text"  id="exampleInputFile"
+                                placeholder="Enter Venue Name" class="form-control" name="englishName" ngModel
+                                >
+                          
+                        </div>
+
+                    
+                        <div class="modal-footer justify-content-center border-0 py-0">
+                            <button type="button" class="ct_custom_btn  py-2 w-auto" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit ct_" class="ct_custom_btn w-auto py-2" >Add
+                                items</button>
+                            <button hidden type="button" class="btn btn-secondary w-auto py-2" #closeModal2
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                        <div *ngIf="suggestionData.length> 0">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Category </th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let items of suggestionData">
+                                   
+                                   
+                                    <td>{{items.item_name}}</td>
+                                    <td>{{items.category_name}}</td>
+                                   
+                                  </tr>
+                                
+                                </tbody>
+                              </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
