@@ -15,24 +15,25 @@ export class CacheInterceptor implements HttpInterceptor {
   constructor(private cacheService: CacheService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Only cache GET requests
+  if (req.headers.get('X-Bypass-Cache')) {
+     
+      return next.handle(req);
+    }
     if (req.method !== 'GET') {
       return next.handle(req);
     }
 
-    // Check if request is in cache
-    const cachedResponse = this.cacheService.get(req);
+    const cachedResponse = this.cacheService.get(req.url);
     if (cachedResponse) {
-      return of(cachedResponse);
+      return of(new HttpResponse({ body: cachedResponse }));
     }
 
-    // Send request to server and cache the response
     return next.handle(req).pipe(
       tap(event => {
         if (event instanceof HttpResponse) {
-          this.cacheService.put(req, event);
+          this.cacheService.set(req.url, event.body);
         }
       })
-    );
+    )
   }
 }

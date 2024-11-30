@@ -72,6 +72,16 @@ export class TemplatesComponent {
       }
     });
   };
+  getNoCacheData() {
+    this.service.getApiNoCache('getAllCategories').subscribe({
+      next: (resp:any) => {
+        this.data = resp.searchCategory;
+      },
+      error: error => {
+        console.log(error.message)
+      }
+    });
+  };
 
   onItemsClick(customer: any) {
     const currentPage = (this.table?.first ?? 0) / (this.table?.rows ?? 20) + 1;
@@ -130,7 +140,7 @@ export class TemplatesComponent {
           this.closeModal.nativeElement.click()
           this.onCloseModel()
           this.toastr.success(res.msg);
-          this.getData()
+          this.getNoCacheData()
         } else {
           this.toastr.warning(res.msg);
         }

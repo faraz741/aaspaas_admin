@@ -236,7 +236,7 @@ export class ShopsComponent {
   };
 
   onSubmit(data: any, num: number) {
-    console.log(this.selectedPrimaryCategory)
+   
     this.myForm.markAllAsTouched()
     this.myEditForm.markAllAsTouched()
     if (this.myForm.invalid && num == 1) {
@@ -356,7 +356,7 @@ export class ShopsComponent {
           // Update cache with the new response
           const request = new HttpRequest('GET', this.service.getReqApi('getShops')); // Replace with the actual URL
           const response = new HttpResponse({ body: res });
-          this.cacheService.put(request, response);
+          this.cacheService.set(request.url, response);
   
         } else {
           this.toastr.warning(res.msg);

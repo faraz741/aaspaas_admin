@@ -1,0 +1,38 @@
+.suggestion-list {
+    position: absolute;
+    z-index: 1000; /* Ensure it appears on top of other elements */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Match the width of the input field */
+    max-height: 200px; /* Limit the height, so it doesn't take too much space */
+    overflow-y: auto; /* Enable scrolling if there are too many suggestions */
+    margin-top: 2px; /* Slight gap between input and suggestion list */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+    padding: 0; /* Remove default padding */
+    list-style-type: none; /* Remove bullets */
+}
+
+.suggestion-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.suggestion-list li:hover {
+    background-color: #f0f0f0; /* Highlight suggestion on hover */
+}
+
+#ct_supplier .modal-content{
+    overflow-y: auto;
+    max-height: 800px;
+    height: auto;
+}
+
+button.p-element.p-button-outlined.p-button.p-component {
+    margin-right: 8px;
+    background: #fff;
+    padding: 5px 10px;
+    color: #aaa;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+}

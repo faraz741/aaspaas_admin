@@ -1,0 +1,313 @@
+<div class="ct_middle_cnt">
+    <div class="mt-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+            <h4 class="mb-0 ct_h2 ">Categories</h4>
+            <button type="button" class="ct_custom_btn w-auto py-2" data-bs-toggle="modal"
+                data-bs-target="#ct_supplier_detail">
+                + Add karigars
+            </button>
+        </div>
+
+
+        <div class="table-responsive ct_custom_table">
+            <div id="example_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
+                <div class="row mt-2 justify-content-between">
+                    <div class="col-md-auto me-auto ">
+                    </div>
+
+                </div>
+                <div class="row mt-2 justify-content-md-center">
+                    <div class="col-12 ">
+                        <p-table class="table table-striped dataTable mb-0 w-100" id="example"
+                            aria-describedby="example_info" #dt [value]="data" dataKey="id" [rowHover]="true"
+                            [rows]="20" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+                            [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [filterDelay]="0" [globalFilterFields]="['category_name']">
+                            <ng-template pTemplate="caption">
+                                <div class="table-header">
+                                    <span class="p-input-icon-left">
+                                       
+                                        <!-- <input class="form-control" pInputText type="text" (input)="applyFilter($event)"
+                                            placeholder="Global Search" /> -->
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="min-width: 5rem">#</th>
+                                    <th pSortableColumn="category_name" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Image
+                                            <p-sortIcon field="category_name"></p-sortIcon>
+
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="click" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Karigar name
+                                            <p-sortIcon field="click"></p-sortIcon>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="itemsCount" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Description
+                                            <p-sortIcon field="itemsCount"></p-sortIcon>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="itemsCount" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Description
+                                            <p-sortIcon field="itemsCount"></p-sortIcon>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="itemsCount" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Address
+                                            <p-sortIcon field="itemsCount"></p-sortIcon>
+
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="itemsCount" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Charges
+                                            <p-sortIcon field="itemsCount"></p-sortIcon>
+
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="itemsCount" style="min-width: 14rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            Category
+                                            <p-sortIcon field="itemsCount"></p-sortIcon>
+
+                                        </div>
+                                    </th>
+                                
+
+                                    <th style="width: 5rem"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-customer>
+                                <tr class="p-selectable-row">
+                                    <td>{{rowIndex +1}}</td>
+                                    <td>
+                                        <span class="p-column-title">Category Name</span>
+                                        {{ customer.category_name }}
+                                    </td>
+                                    <td>
+                                        <span class="p-column-title">Clicks</span>
+                                        {{ customer.click }}
+                                    </td>
+                                    <td>
+                                        <span class="p-column-title">Item Count</span>
+                                        {{ customer.itemsCount }}
+                                    </td>
+
+                                    <!-- <td style="text-align: center" class="d-flex gap-2">
+                                        <button type="button" class="p-button-secondary btn btn-secondary"
+                                            icon="pi pi-cog" (click)="onItemsClick(customer)"> Items</button>
+                                        <button type="button" class="p-button-secondary btn btn-secondary"
+                                            icon="pi pi-cog" data-bs-toggle="modal"
+                                            data-bs-target="#EditCommitted_Price" (click)="onEditClick(customer)">
+                                            Edit</button>
+                                    </td> -->
+                                </tr>
+                            </ng-template>
+
+
+                            <tfoot></tfoot>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade Committed_Price" id="ct_supplier_detail" tabindex="-1" aria-labelledby="ct_supplier_detailLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body py-5">
+                <div class="">
+                    <h4 class="mb-5 text-center"><strong>Add New Karigar</strong></h4>
+                    <form [formGroup]="karigarForm" (ngSubmit)="submitForm()">
+                        <!-- Karigar Photo -->
+                        <div class="ct_formField mb-3 form-group">
+                          <label for="karigarPhoto" class="mb-2 ct_fw_600">Karigar Photo</label>
+                          <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" (click)="browsePhoto()">Browse</button>
+                            <button type="button" class="btn btn-primary" (click)="capturePhoto()">Capture from Camera</button>
+                          </div>
+                          <input type="file" id="karigarPhoto" accept="image/*" class="form-control mt-2 d-none" #fileInput />
+                          <div *ngIf="photoError" class="text-danger mt-1">Photo is required.</div>
+                        </div>
+                      
+                        <!-- Preview Image -->
+                        <div *ngIf="karigarImage" class="mb-3">
+                          <img [src]="karigarImage" alt="Karigar Photo" class="img-fluid border" style="max-width: 100%; height: auto;" />
+                        </div>
+                      
+                        <!-- Other Form Fields -->
+                        <!-- Example: Karigar Name -->
+                        <div class="ct_formField mb-3 form-group">
+                          <label for="karigarName" class="mb-2 ct_fw_600">Karigar Name</label>
+                          <input
+                            type="text"
+                            id="karigarName"
+                            formControlName="karigarName"
+                            placeholder="Enter Karigar Name"
+                            class="form-control"
+                          />
+                          <div *ngIf="karigarForm.get('karigarName')?.invalid && karigarForm.get('karigarName')?.touched" class="text-danger">
+                            Karigar name is required.
+                          </div>
+                        </div>
+
+                        <div class="ct_formField mb-3 form-group">
+                            <label for="description" class="mb-2 ct_fw_600">Description</label>
+                            <input
+                              type="text"
+                              id="description"
+                              formControlName="description"
+                              placeholder="Enter Description"
+                              class="form-control"
+                            />
+                            <div *ngIf="karigarForm.get('description')?.invalid && karigarForm.get('description')?.touched" class="text-danger">
+                              Description is required.
+                            </div>
+                          </div>
+                          <div class="col-md-6 ct_formField mb-3 form-group">
+                            <label class="mb-2 ct_fw_600">Pin code</label>
+                            <input type="text" placeholder="Enter pin code" class="form-control"
+                                formControlName="pincode" (keyup)="getAreaList($event , '0')" autocomplete="on">
+                                <ul *ngIf="filteredSuggestions.length > 0" class="suggestion-list">
+                                    <li *ngFor="let suggestion of filteredSuggestions" (click)="selectSuggestion(suggestion)">
+                                        {{ suggestion }}
+                                    </li>
+                                </ul>
+                            <div *ngIf="karigarForm.controls['pincode']?.invalid && (karigarForm.controls['pincode'].dirty || karigarForm.controls['pincode'].touched)"
+                                class="text-danger">
+                                Address is required.
+                            </div>
+                        </div>
+                          <!-- Area -->
+                          <div class="col-md-6 ct_formField mb-3 form-group ">
+                            <label class="mb-2 ct_fw_600">Area</label>
+                            <div class=" flex justify-content-center">
+                                <p-dropdown class="ct_custom_dropdown form-control" [options]="areaList" formControlName="area"
+                                   optionLabel="areaname"
+                                    optionValue="areaname" [filter]="true" filterBy="areaname" [showClear]="true"
+                                    name="areaname" placeholder="Enter pincode">
+
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        
+                          <!-- Charges -->
+                          <div class="ct_formField mb-3 form-group">
+                            <label for="charges" class="mb-2 ct_fw_600">Charges</label>
+                            <input
+                              type="number"
+                              id="charges"
+                              formControlName="charges"
+                              placeholder="Enter Charges"
+                              class="form-control"
+                            />
+                            <div *ngIf="karigarForm.get('charges')?.invalid && karigarForm.get('charges')?.touched" class="text-danger">
+                              Charges must be a positive number.
+                            </div>
+                          </div>
+                        
+                          <!-- Category -->
+                          <div class="ct_formField mb-3 form-group">
+                            <label for="category" class="mb-2 ct_fw_600">Category</label>
+                            <input
+                              type="text"
+                              id="category"
+                              formControlName="category"
+                              placeholder="Enter Category"
+                              class="form-control"
+                            />
+                            <div *ngIf="karigarForm.get('category')?.invalid && karigarForm.get('category')?.touched" class="text-danger">
+                              Category is required.
+                            </div>
+                          </div>
+                        
+                          <!-- Address -->
+                          <div class="ct_formField mb-3 form-group">
+                            <label for="address" class="mb-2 ct_fw_600">Address</label>
+                            <input
+                              type="text"
+                              id="address"
+                              formControlName="address"
+                              placeholder="Enter Address"
+                              class="form-control"
+                            />
+                            <div *ngIf="karigarForm.get('address')?.invalid && karigarForm.get('address')?.touched" class="text-danger">
+                              Address is required.
+                            </div>
+                          </div>
+                      
+                        <!-- Submit Buttons -->
+                        <div class="modal-footer justify-content-center border-0 py-0">
+                          <button type="button" class="btn btn-secondary" (click)="onCloseModel()">Cancel</button>
+                          <button type="submit" class="btn btn-primary" [disabled]="karigarForm.invalid">Add Karigar</button>
+                        </div>
+                      </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  edit modal -->
+<div class="modal fade EditCommitted_Price" id="EditCommitted_Price" tabindex="-1"
+    aria-labelledby="ct_supplier_detailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body py-5">
+                <div class="">
+                    <h4 class="mb-5 text-center"><strong>Edit Category</strong></h4>
+                    <form>
+
+                        <div class="ct_formField mb-3 form-group">
+                            <label for="" class="mb-2 ct_fw_600">Name</label>
+                            <input type="text" placeholder="Enter Name" class="form-control" [(ngModel)]="categoryName"
+                                [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <!-- <div class="ct_formField mb-3 form-group">
+                            <label for="" class="mb-2 ct_fw_600"> Category Image </label>
+                            <input type="file" (change)="PreviewImage($event)" id="exampleInputFile"
+                                placeholder="Enter Venue Name" class="form-control" accept="image/png, image/svg+xml, image/gif, image/jpeg">
+                            <img *ngIf="!NOimage" class="ct_upload_img_121" [src]="category_image" alt="Preview" id="uploadPreview">
+                        </div> -->
+
+                
+                        <div class="ct_formField mb-3 form-group">
+                            <label for="" class="mb-2 ct_fw_600">Clicks</label>
+                            <input type="text" placeholder="Enter Name" class="form-control" [(ngModel)]="clicks"
+                                [ngModelOptions]="{standalone: true}">
+
+                        </div>
+
+
+
+                        <div class="modal-footer justify-content-center border-0 py-0">
+                            <button type="button" class="ct_custom_btn  py-2 w-auto"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <!-- <button type="button ct_" class="ct_custom_btn w-auto py-2" (click)="onEditSubmit()">Update
+                                category</button> -->
+                            <button hidden type="button" class="btn btn-secondary w-auto py-2" #closeModal2
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

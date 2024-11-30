@@ -41,7 +41,8 @@ import { environment } from 'src/environments/environment.development';
 import { ShopsImagesComponent } from './pages/shops/shops-images/shops-images.component';
 import {FileUploadModule} from 'primeng/fileupload';
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
-import { MessageService } from 'primeng/api'; // PrimeNG MessageService
+import { MessageService } from 'primeng/api';
+import { KarigarComponent } from './pages/karigar/karigar.component'; // PrimeNG MessageService
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { MessageService } from 'primeng/api'; // PrimeNG MessageService
     ItemsComponent,
     AllItemsComponent,
     ShopsComponent,
-    ShopsImagesComponent
+    ShopsImagesComponent,
+    KarigarComponent
 
   ],
   imports: [

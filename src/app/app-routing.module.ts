@@ -11,6 +11,7 @@ import { ItemsComponent } from './pages/items/items.component';
 import { AllItemsComponent } from './pages/all-items/all-items.component';
 import { ShopsComponent } from './pages/shops/shops.component';
 import { ShopsImagesComponent } from './pages/shops/shops-images/shops-images.component';
+import { KarigarComponent } from './pages/karigar/karigar.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,9 @@ const routes: Routes = [
       },
       {
         path: 'items/:id/:name', component: ItemsComponent
+      },
+      {
+        path: 'karigars', component: KarigarComponent
       },
     ]
   }

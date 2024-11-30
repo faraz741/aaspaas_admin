@@ -30,6 +30,11 @@ export class MainService {
     return `${apiUrl}${endpoint}`;
   }
 
+  getApiNoCache<T>(url: string): Observable<T> {
+    const headers = new HttpHeaders({ 'X-Bypass-Cache': 'true' });
+    return this.http.get<T>(this.apiUrl + url, { headers });
+  }
+
   // gdeleteApi(url:any):Observable<any>{
   //   return this.http.delete(this.apiUrl + url )
   // };
